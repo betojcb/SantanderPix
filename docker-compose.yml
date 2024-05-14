@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  flask_app:
+    image: user/repo:flask-app-frangonopote
+    ports:
+      - "57000:57000"
+    networks:
+      - frangonopotenetwork
+
+  react_app:
+    image: user/repo:react-app-frangonopote
+    ports:
+      - "57001:80"
+    depends_on:
+      - flask_app
+    networks:
+      - frangonopotenetwork
+
+networks:
+  frangonopotenetwork:
+    name: frangonopotenetwork
+    driver: bridge
